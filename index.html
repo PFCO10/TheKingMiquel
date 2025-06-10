@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>TheKingMiquel - Comunidad de Discord</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    * { box-sizing: border-box; }
+    body { 
+      margin: 0; 
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+      background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 100%); 
+      color: #e0e0e0; 
+      line-height: 1.6;
+    }
+    
+    header { 
+      background: linear-gradient(135deg, #16213e 0%, #0f3460 100%); 
+      padding: 40px 20px; 
+      text-align: center; 
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="%23ffffff" opacity="0.1"/><circle cx="75" cy="75" r="1" fill="%23ffffff" opacity="0.1"/><circle cx="50" cy="10" r="0.5" fill="%23ffffff" opacity="0.15"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+      opacity: 0.1;
+    }
+    
+    header * { position: relative; z-index: 1; }
+    
+    header h1 { 
+      color: #5dade2; 
+      margin: 0; 
+      font-size: 3em;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+      margin-bottom: 10px;
+    }
+    
+    header p:first-of-type {
+      font-size: 1.2em;
+      margin: 10px 0 30px 0;
+      color: #a8d8ea;
+      font-style: italic;
+    }
+    
+    nav { margin: 20px 0; }
+    nav a { 
+      color: #a8d8ea; 
+      margin: 0 15px; 
+      text-decoration: none; 
+      font-weight: 500;
+      transition: all 0.3s ease;
+      padding: 5px 10px;
+      border-radius: 20px;
+    }
+    nav a:hover {
+      color: #5dade2;
+      background: rgba(93, 173, 226, 0.1);
+      transform: translateY(-2px);
+    }
+    
+    section { 
+      padding: 50px 20px; 
+      max-width: 900px; 
+      margin: auto; 
+      background: rgba(255,255,255,0.02);
+      margin-bottom: 20px;
+      border-radius: 15px;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.1);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+    }
+    
+    .btn { 
+      background: linear-gradient(135deg, #5dade2 0%, #3498db 100%);
+      color: #ffffff; 
+      padding: 15px 30px; 
+      border: none; 
+      border-radius: 50px; 
+      cursor: pointer; 
+      font-size: 1.1em;
+      font-weight: bold;
+      text-decoration: none;
+      display: inline-block;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .btn:hover { 
+      transform: translateY(-3px);
+      box-shadow: 0 6px 25px rgba(52, 152, 219, 0.5);
+      background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+    }
+    
+    h2 { 
+      border-bottom: 3px solid #5dade2; 
+      padding-bottom: 15px; 
+      margin-top: 0; 
+      color: #5dade2;
+      font-size: 2em;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+    }
+    
+    ul { 
+      padding-left: 20px; 
+    }
+    ul li {
+      margin-bottom: 10px;
+      color: #c8c8c8;
+    }
+    ul li strong {
+      color: #5dade2;
+    }
+    
+    p {
+      color: #d0d0d0;
+      font-size: 1.1em;
+    }
+    
+    footer { 
+      background: linear-gradient(135deg, #0f0f23 0%, #16213e 100%); 
+      padding: 30px; 
+      text-align: center; 
+      font-size: 0.9em; 
+      border-top: 1px solid rgba(255,255,255,0.1);
+      color: #a0a0a0;
+    }
+    
+    /* Partículas de fondo */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: 
+        radial-gradient(circle at 20% 50%, rgba(93, 173, 226, 0.1) 1px, transparent 1px),
+        radial-gradient(circle at 40% 20%, rgba(93, 173, 226, 0.08) 1px, transparent 1px),
+        radial-gradient(circle at 90% 70%, rgba(93, 173, 226, 0.06) 1px, transparent 1px),
+        radial-gradient(circle at 70% 90%, rgba(93, 173, 226, 0.05) 1px, transparent 1px);
+      background-size: 200px 200px, 150px 150px, 100px 100px, 250px 250px;
+      animation: particleFloat 20s ease-in-out infinite;
+      pointer-events: none;
+      z-index: -1;
+    }
+    
+    /* Botón secundario */
+    .btn-secondary {
+      background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+      box-shadow: 0 4px 15px rgba(231, 76, 60, 0.3);
+    }
+    .btn-secondary:hover {
+      background: linear-gradient(135deg, #c0392b 0%, #a93226 100%);
+      box-shadow: 0 6px 25px rgba(231, 76, 60, 0.5);
+    }
+    
+    /* Animaciones suaves */
+    section {
+      animation: fadeInUp 0.8s ease-out;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    section:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+    }
+    
+    /* Efecto de typing en el título */
+    header h1 {
+      overflow: hidden;
+      border-right: 3px solid #5dade2;
+      white-space: nowrap;
+      animation: typing 3s steps(40, end), blink-caret 0.75s step-end infinite;
+    }
+    
+    /* Hover effects en elementos de lista */
+    ul li {
+      transition: all 0.3s ease;
+      padding: 8px;
+      border-radius: 8px;
+      margin: 8px 0;
+    }
+    
+    ul li:hover {
+      background: rgba(93, 173, 226, 0.1);
+      transform: translateX(10px);
+      border-left: 3px solid #5dade2;
+    }
+    
+    /* Efecto glow en h2 */
+    h2 {
+      position: relative;
+      animation: glow 2s ease-in-out infinite alternate;
+    }
+    
+    /* Animación de navegación */
+    nav a {
+      position: relative;
+      overflow: hidden;
+    }
+    
+    nav a::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: -100%;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg, #5dade2, #3498db);
+      transition: left 0.3s ease;
+    }
+    
+    nav a:hover::before {
+      left: 0;
+    }
+    
+    /* Keyframes */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    @keyframes particleFloat {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      25% { transform: translateY(-20px) rotate(90deg); }
+      50% { transform: translateY(-10px) rotate(180deg); }
+      75% { transform: translateY(-30px) rotate(270deg); }
+    }
+    
+    @keyframes typing {
+      from { width: 0; }
+      to { width: 100%; }
+    }
+    
+    @keyframes blink-caret {
+      from, to { border-color: transparent; }
+      50% { border-color: #5dade2; }
+    }
+    
+    @keyframes glow {
+      from { text-shadow: 1px 1px 2px rgba(0,0,0,0.3), 0 0 10px rgba(93, 173, 226, 0.3); }
+      to { text-shadow: 1px 1px 2px rgba(0,0,0,0.3), 0 0 20px rgba(93, 173, 226, 0.6), 0 0 30px rgba(93, 173, 226, 0.4); }
+    }
+    
+    /* Efecto de scroll suave */
+    html {
+      scroll-behavior: smooth;
+    }
+    
+    /* Parallax en header */
+    header {
+      background-attachment: fixed;
+      background-position: center;
+      animation: headerPulse 4s ease-in-out infinite;
+    }
+    
+    @keyframes headerPulse {
+      0%, 100% { box-shadow: 0 4px 20px rgba(0,0,0,0.3); }
+      50% { box-shadow: 0 8px 40px rgba(93, 173, 226, 0.2); }
+    }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+      header h1 { font-size: 2.5em; }
+      section { padding: 30px 15px; margin-bottom: 15px; }
+      nav a { margin: 0 8px; font-size: 0.9em; }
+      .btn { padding: 12px 25px; font-size: 1em; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>TheKingMiquel</h1>
+    <p>La comunidad donde todo es posible</p>
+    <nav>
+      <a href="#about">Inicio</a> |
+      <a href="#rules">Reglas</a> |
+      <a href="#events">Eventos</a> |
+      <a href="#roles">Roles</a> |
+      <a href="#contact">Contacto</a>
+    </nav>
+    <p><a class="btn" href="https://discord.gg/Eqc2mbWz" target="_blank">UNIRSE AL DISCORD</a></p>
+  </header>
+
+  <section id="about">
+    <h2>¿Qué es TheKingMiquel?</h2>
+    <p>Es nuestro servidor de Discord dedicado a la **comunidad gamer**, donde nos juntamos para jugar, charlar y participar en eventos juntos. Si te gustan los torneos, actividades temáticas y una comunidad amigable, este es tu sitio.</p>
+  </section>
+
+  <section id="rules">
+    <h2>Reglas del servidor</h2>
+    <ul>
+      <li>Respeto ante todo: nada de insultos o discriminación.</li>
+      <li>Evita spam y publicidad sin permiso.</li>
+      <li>Usa los canales correctos para cada tema.</li>
+      <li>No compartas contenido ilegal ni NSFW.</li>
+      <li>Sigue las indicaciones del staff en todo momento.</li>
+    </ul>
+  </section>
+
+  <section id="events">
+    <h2>Eventos y actividades</h2>
+    <p>Todavía estamos preparando algunos eventos especiales. Mantente al tanto en el Discord para ver las fechas y actividades.</p>
+    <div style="text-align: center; margin-top: 30px;">
+      <a class="btn btn-secondary" href="https://communityevent.created.app/" target="_blank">VER EVENTOS ESPECIALES</a>
+    </div>
+  </section>
+
+  <section id="roles">
+    <h2>Roles y beneficios</h2>
+    <ul>
+      <li><strong>Miembro:</strong> Rol base, acceso a chat y soporte.</li>
+      <li><strong>Nivel 5+:</strong> Acceso a canal exclusivo y emojis especiales.</li>
+      <li><strong>Colaborador:</strong> Participación en organización de eventos y roles especiales.</li>
+    </ul>
+  </section>
+
+  <section id="contact">
+    <h2>Contacto / Soporte</h2>
+    <p>Si necesitas ayuda, puedes escribirle a:</p>
+    <ul>
+      <li><strong>TheKingMiquel#1234 (Owner)</strong></li>
+      <li><strong>Staff de soporte:</strong> @Moderador1, @Moderador2</li>
+    </ul>
+  </section>
+
+  <footer>
+    &copy; 2025 TheKingMiquel • Creado con cariño para nuestra comunidad.
+  </footer>
+</body>
+</html>
